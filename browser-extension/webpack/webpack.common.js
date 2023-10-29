@@ -14,6 +14,8 @@ module.exports = {
       serviceWorker: path.resolve(__dirname, "../src/serviceWorker", "serviceWorker.ts"),
       cotentScript: path.resolve(__dirname, "../src/cotentScript", "cotentScript.ts"),
       options: path.resolve(__dirname, "../src/options", "options.tsx"),
+      devtools: path.resolve(__dirname, "../src/devtools", "devtools.tsx"),
+      panel: path.resolve(__dirname, "../src/devtools", "components/panel/panel.tsx"),
       popup: path.resolve(__dirname, "../src/popup", "popup.tsx"),
       HTTPLoggerWindow: path.resolve(__dirname, "../src/HTTPLoggerWindow", "HTTPLoggerWindow.tsx"),
       'editor.worker': path.resolve(__dirname, '../node_modules/monaco-editor/esm/vs/editor/editor.worker.js'),
@@ -72,6 +74,12 @@ module.exports = {
          chunks: ['options']
       }),
       new HtmlWebpackPlugin({
+        inject: true,
+        template: './src/devtools/devtools.html',
+        filename:  'devtools/devtools.html',
+        chunks: ['devtools']
+     }),
+      new HtmlWebpackPlugin({
          inject: true,
          template: './src/HTTPLoggerWindow/HTTPLoggerWindow.html',
          filename:  'HTTPLoggerWindow/HTTPLoggerWindow.html',
@@ -91,6 +99,7 @@ module.exports = {
       new CopyPlugin({
         patterns: [
            {from : "src/assets/images", to: "assets/images"},
+           {from : "src/devtools/components/panel/panel.html", to: "panel/panel.html"},
         ]
       }),
       (() => {
