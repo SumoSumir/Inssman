@@ -5,7 +5,6 @@ import Tooltip from "@options/components/common/tooltip/tooltip";
 import Icon from "@options/components/common/icon/icon";
 import { ListHeader, ListItems } from "@options/components/common/list/list";
 import { Link } from "react-router-dom";
-import { timeDifference } from "@utils/timeDifference";
 import { cutString } from "@utils/cutString";
 
 export const LIST_HEADERS: ListHeader[] = [

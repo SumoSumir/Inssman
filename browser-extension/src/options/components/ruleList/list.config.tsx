@@ -27,12 +27,7 @@ export const LIST_HEADERS: ListHeader[] = [
   {
     title: "Last Matched",
     render: function () {
-      return (
-        <span>
-          {this.title}
-          <sup className="inline-block text-xs text-red-500 bottom-4">Beta</sup>
-        </span>
-      );
+      return this.title;
     },
   },
   {

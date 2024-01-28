@@ -1,5 +1,5 @@
 import RCInput, { InputProps, InputRef } from "rc-input";
-import { ComponentProps, ReactNode, forwardRef } from "react";
+import { ReactNode, forwardRef } from "react";
 
 type Props = {
   error?: string | null;

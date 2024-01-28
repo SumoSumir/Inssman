@@ -42,7 +42,6 @@ const Record: FC = (): ReactElement => {
             <span>Record Session & Replay</span>
           </div>
         </div>
-
         <div className="leading-7 text-slate-400">
           <p>Record all events in the browser and replay them with precise timing and interactions</p>
           <p>allowing to thoroughly test and debug web applications</p>

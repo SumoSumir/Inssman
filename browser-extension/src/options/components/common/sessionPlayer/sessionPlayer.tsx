@@ -40,7 +40,7 @@ const SessionPlayer: FC<Props> = forwardRef(({ session, playerOptions = {} }, re
   }, [session, playerRef.current, playerTagRef.current, validVideo]);
 
   return (
-    <>{validVideo ? <div ref={playerTagRef}></div> : <span>Recorded Video Is Damaged Please Record Again</span>}</>
+    <>{validVideo ? <div ref={playerTagRef}></div> : <span>Recorded Session Is Damaged Please Record Again</span>}</>
   );
 });
 

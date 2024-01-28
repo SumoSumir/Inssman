@@ -82,7 +82,9 @@ const RuleForm = () => {
   };
 
   const onChange = (event, field) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    console.log("name", name);
+    console.log("value", value);
     const { validations = {} } = field;
     const error = Array.isArray(value)
       ? validateArray(name, value, validations)
@@ -196,7 +198,9 @@ const RuleForm = () => {
         };
         return;
       }
-      defaultValues[field.name] = field.defaultValue;
+      if (typeof field.defaultValue !== "undefined") {
+        defaultValues[field.name] = field.defaultValue;
+      }
     });
     return defaultValues;
   };

@@ -13,6 +13,7 @@ import {
   PageType,
   QueryParamAction,
 } from "@models/formFieldModel";
+
 import RuleActionType = chrome.declarativeNetRequest.RuleActionType;
 import HeaderOperation = chrome.declarativeNetRequest.HeaderOperation;
 import ResourceType = chrome.declarativeNetRequest.ResourceType;
@@ -93,11 +94,13 @@ export type Field = {
   multipleFields: boolean;
   name?: string;
   defaultValue?: unknown;
+  value?: unknown;
   defaultValues?: { [key: string]: unknown };
   props?: { [key: string]: unknown };
   placeholder?: string;
   validations?: { [key: string]: Validation[] } | { [key: string]: { [key: string]: Validation[] } };
   formatters?: { [key: string]: Function };
+  label?: string;
 };
 
 export type Config = {
@@ -484,25 +487,44 @@ const config: Config = {
       },
       {
         id: 503,
+        type: "radioButton",
+        name: "responseBodyType",
+        multipleFields: false,
+        value: "static",
+        defaultValue: "static",
+        label: "Static Response",
+      },
+      {
+        id: 504,
+        type: "radioButton",
+        name: "responseBodyType",
+        multipleFields: false,
+        value: "dynamic",
+        label: "Dynamic Response",
+      },
+      {
+        id: 505,
         type: "editor",
         name: "editorValue",
         multipleFields: false,
-        defaultValue: "",
       },
     ],
-    generateRule: (ruleMetaData) => ({
-      action: {
-        type: RuleActionType.REDIRECT,
-        redirect: {
-          url: encode(MimeTypeMap[ruleMetaData.editorLang], ruleMetaData.editorValue),
-          ...generateRegexSubstitution(ruleMetaData),
+    generateRule: (ruleMetaData) => {
+      if (ruleMetaData.responseBodyType === "dynamic") return null;
+      return {
+        action: {
+          type: RuleActionType.REDIRECT,
+          redirect: {
+            url: encode(MimeTypeMap[ruleMetaData.editorLang], ruleMetaData.editorValue),
+            ...generateRegexSubstitution(ruleMetaData),
+          },
         },
-      },
-      condition: {
-        ...generateMatchType(ruleMetaData),
-        resourceTypes: ruleMetaData.resourceTypes.length ? ruleMetaData.resourceTypes : Object.values(ResourceType),
-      },
-    }),
+        condition: {
+          ...generateMatchType(ruleMetaData),
+          resourceTypes: ruleMetaData.resourceTypes.length ? ruleMetaData.resourceTypes : Object.values(ResourceType),
+        },
+      };
+    },
   },
   [PageType.INJECT_FILE]: {
     fields: [
