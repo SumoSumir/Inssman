@@ -3,8 +3,8 @@ import { ComponentProps, FC } from "react";
 
 type Props = {} & ComponentProps<"input"> & CheckboxProps & React.RefAttributes<CheckboxRef>;
 
-const RadioButton: FC<Props> = (props) => {
+const Radio: FC<Props> = (props) => {
   return <Checkbox {...props} />;
 };
 
-export default RadioButton;
+export default Radio;

@@ -6,7 +6,7 @@ import Select from "@options/components/common/select/select";
 import Editor from "@options/components/common/editor/editor";
 import InjectFileSources from "@options/components/common/InjectFileSources/InjectFileSources";
 import Input from "@options/components/common/input/input";
-import RadioButton from "@options/components/common/radioButton/radioButton";
+import Radio from "@options/components/common/radio/radio";
 import FormContextProvider from "@context/formContext";
 import config from "./config";
 import { EditorLanguage, FormMode, HeaderModificationType, QueryParamAction } from "@models/formFieldModel";
@@ -130,10 +130,10 @@ const FormBuilder: FC<Props> = ({ ruleMetaData, onChange, error, pageType }) => 
         );
       case "injectFileSources":
         return <InjectFileSources ruleMetaData={ruleMetaData} onChange={(e) => onChange(e, field)} error={error} />;
-      case "radioButton":
+      case "radio":
         return (
           <label className="inline-flex items-center gap-2 pr-5 cursor-pointer">
-            <RadioButton
+            <Radio
               type="radio"
               name={field.name}
               checked={field.value === ruleMetaData.responseBodyType}

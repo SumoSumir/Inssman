@@ -487,7 +487,7 @@ const config: Config = {
       },
       {
         id: 503,
-        type: "radioButton",
+        type: "radio",
         name: "responseBodyType",
         multipleFields: false,
         value: "static",
@@ -496,7 +496,7 @@ const config: Config = {
       },
       {
         id: 504,
-        type: "radioButton",
+        type: "radio",
         name: "responseBodyType",
         multipleFields: false,
         value: "dynamic",

@@ -2,7 +2,6 @@ import TrackService from "@services/TrackService";
 import Toast from "@options/components/common/toast/toast";
 import Form from "@options/components/common/form/form";
 import FormBuilder from "@options/formBuilder/formBuilder";
-import Section from "@options/components/common/section/section";
 import config from "@options/formBuilder/config";
 import { FormMode, IForm, IRule, IRuleMetaData, PageName } from "@models/formFieldModel";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -83,8 +82,6 @@ const RuleForm = () => {
 
   const onChange = (event, field) => {
     let { name, value } = event.target;
-    console.log("name", name);
-    console.log("value", value);
     const { validations = {} } = field;
     const error = Array.isArray(value)
       ? validateArray(name, value, validations)

@@ -68,7 +68,7 @@ const Form = ({ children, onSubmit, onDelete, error, pageType, mode = "create" }
       </Section>
       <Section classes="px-2 py-4 border-0 border-b border-r bg-slate-800 bg-opacity-40">
         <div className="text-red-500 text-md">{error.general}</div>
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={handleSubmit(onSubmitt)}>
           {children}
           <input type="submit" className="hidden" />
         </form>
