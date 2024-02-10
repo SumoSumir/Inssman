@@ -11,6 +11,8 @@ import FormContextProvider from "@context/formContext";
 import config from "./config";
 import { EditorLanguage, FormMode, HeaderModificationType, QueryParamAction } from "@models/formFieldModel";
 import { Fragment, useMemo, PropsWithChildren, FC } from "react";
+import { useFormContext, Controller } from "react-hook-form";
+
 import HeaderOperation = chrome.declarativeNetRequest.HeaderOperation;
 
 type Props = PropsWithChildren<{
@@ -23,20 +25,45 @@ type Props = PropsWithChildren<{
 }>;
 
 const FormBuilder: FC<Props> = ({ ruleMetaData, onChange, error, pageType }) => {
+  const formContext = useFormContext();
   const { fields } = config[pageType];
+
+  console.log("formContext.control", formContext.control);
 
   const generateField = (field: any) => {
     switch (field.type) {
       case "input":
         return (
           <div className="w-1/5">
-            <Input
+            <Controller
+              rules={{
+                maxLength: 1,
+              }}
+              control={formContext.control}
               name={field.name}
-              value={ruleMetaData.name || field.defaultValue}
-              onChange={(e) => onChange(e, field)}
-              placeholder={field.placeholder}
-              error={error?.name}
+              render={({ field: fieldd }) => {
+                console.log("fieldd", fieldd);
+                return (
+                  <Input
+                    // defaultValue={field.defaultValue}
+                    // value={ruleMetaData.name || field.defaultValue}
+                    // onChange={(e) => onChange(e, field)}
+                    placeholder={field.placeholder}
+                    onChange={fieldd.onChange}
+                    ref={fieldd.ref}
+                    value={fieldd.value}
+                    // error={error?.name}
+                    // {...formContext.register("name", {
+                    //   validate: (value: any) => {
+                    //     console.log("value", value);
+                    //     return false;
+                    //   },
+                    // })}
+                  />
+                );
+              }}
             />
+            {/* <input {...formContext.register("name")} /> */}
           </div>
         );
       case "sourceFields":

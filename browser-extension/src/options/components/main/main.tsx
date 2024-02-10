@@ -140,15 +140,6 @@ export default () => {
                 </Button>
               </div>
               <Button
-                onClick={() => setDialogName("deleteAllRules")}
-                variant="outline"
-                className="hover:text-red-400 hover:border-red-400"
-                trackName="Delete All Rules Popup"
-                startIcon={<Icon name="trash" />}
-              >
-                Delete All Rules
-              </Button>
-              <Button
                 size="small"
                 onClick={() => setDialogName("deleteAllRules")}
                 variant="outline"

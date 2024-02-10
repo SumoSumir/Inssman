@@ -4,6 +4,7 @@ import BackButton from "@options/components/common/backButton/backButton";
 import Icon from "@options/components/common/icon/icon";
 import { PageName, IconsMap } from "@models/formFieldModel";
 import { PropsWithChildren } from "react";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
 
 type Props = PropsWithChildren<{
   onSubmit: any;
@@ -14,10 +15,13 @@ type Props = PropsWithChildren<{
 }>;
 
 const Form = ({ children, onSubmit, onDelete, error, pageType, mode = "create" }: Props) => {
+  const methods = useForm({ mode: "onChange" });
   const onSubmitHandler = (event) => {
     event.preventDefault();
     onSubmit();
   };
+
+  console.log(methods.watch("name"));
 
   return (
     <>
@@ -68,10 +72,12 @@ const Form = ({ children, onSubmit, onDelete, error, pageType, mode = "create" }
       </Section>
       <Section classes="px-2 py-4 border-0 border-b border-r bg-slate-800 bg-opacity-40">
         <div className="text-red-500 text-md">{error.general}</div>
-        <form onSubmit={handleSubmit(onSubmitt)}>
-          {children}
-          <input type="submit" className="hidden" />
-        </form>
+        <FormProvider {...methods}>
+          <form onSubmit={onSubmitHandler}>
+            {children}
+            <input type="submit" className="hidden" />
+          </form>
+        </FormProvider>
       </Section>
     </>
   );
